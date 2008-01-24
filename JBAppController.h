@@ -1,0 +1,37 @@
+//
+//  JBAppController.h
+//  DeliciousMeal
+//
+//  Created by Christopher Bowns on 12/23/07.
+//  Copyright 2007 Jaded Bits Software. All rights reserved.
+//
+
+#import <Cocoa/Cocoa.h>
+
+@interface JBAppController : NSObject {
+	NSMutableArray *pages;
+	IBOutlet NSButton *startButton;
+	IBOutlet NSTableView *tableView;
+	IBOutlet NSProgressIndicator *progressSpinner;
+	
+	NSMutableData *portProbeData;
+}
+
+- (IBAction)startDownload:(id)sender;
+
+- (void) probePort:(int)portNumber;
+
+// #warning Implement the following methods:
+// #warning spinner progress as private method to call for turning on and off
+
+// #warning Implement table view methods as well: in place of NSArrayController or non?
+// Table view data source methods
+// - (int)numberOfRowsInTableView:(NSTableView *)aTableView;
+// - (id)tableView:(NSTableView*)aTableView
+// objectValueForTableColumn:(NSTableColumn*)aTableColumn
+//             row:(int)row;
+
+
+// #warning Implement the NSURLConnection delegates here
+
+@end
