@@ -1,0 +1,10 @@
+Delicious Meal:
+- API calls: bookmark each of the pages del.icio.us/url/<hash value>, see how many people have bookmarked
+- taking initial hash value: bookmark it:
+- take the response, parse for:
+	- bookmarking users
+	- hash value: bookmark new page, continue ad inifinitum
+
+- try retrieving apple.com or grc.com
+	- see http://transmission.m0k.org/trac/browser/trunk/macosx/PortChecker.h?rev=956 for example code
+	- 
