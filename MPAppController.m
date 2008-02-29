@@ -88,42 +88,17 @@ TODO anything on awakeFromNib?
 	NSString *apiPath = [NSString stringWithFormat:@"https://%@:%@@api.del.icio.us/v1/", username, password, nil];
 	
 	NSURL *requestURL = [NSURL URLWithString:[apiPath stringByAppendingString:request]];
-	NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL:requestURL];
+	NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL: requestURL];
+
+	[URLRequest setCachePolicy: NSURLRequestReloadIgnoringCacheData];
+	[URLRequest setTimeoutInterval: 15.0];
 	
 	[URLRequest setValue:agent forHTTPHeaderField:header];
-
-	NSError *error;
-	NSHTTPURLResponse *response;
-	NSData *xmlData = [NSURLConnection sendSynchronousRequest:URLRequest returningResponse:&response error:&error];
-	NSLog(@"API request: '%@', response: %i, d/l size: %i", request, [response statusCode], [xmlData length], nil);
-	if ([response statusCode] == 401) {
-		NSLog(@"%s 401", _cmd);
-		/*
-			TODO What to do now? Auth challenge, and whatever we handed them failed...
-		*/
-	}
-	if ([response statusCode] == 503) {
-			// we've been throttled
-		NSLog(@"%s 503", _cmd);
-		/*
-			TODO back off, try again in a few seconds...?
-		*/
-	}
 	
-	
-	
-	
-	
-/*	NSURLRequest *URLRequest;
-	URLRequest = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"https://api.del.icio.us/v1/tags/get"]]
-	//@"https://api.del.icio.us/v1/posts/get?&url=http://del.icio.us/", 443]]
-                               cachePolicy: NSURLRequestReloadIgnoringCacheData
-                           timeoutInterval: 15.0];
-	// [request setValue:agent forHTTPHeaderField:header];
-*/
 	NSURLConnection *connection = [NSURLConnection connectionWithRequest: URLRequest
 	                                                            delegate: self];
-
+	
+	
 	if (connection)
 	{
 		deliciousData = [[NSMutableData data] retain];
@@ -141,10 +116,25 @@ TODO anything on awakeFromNib?
 didReceiveResponse:(NSURLResponse*)response
 {
 	#ifdef NSLOG_DEBUG
-	NSLog(@"%s", _cmd);
+	NSLog(@"%s response: %@,", _cmd, response);
 	#endif
 	[deliciousData setLength: 0];
+	
+	// if ([response statusCode] == 401) {
+		// NSLog(@"%s 401", _cmd);
+	/*
+		TODO What to do now? Auth challenge, and whatever we handed them failed...
+	*/
+	// }
+	// if ([response statusCode] == 503) {
+	// we've been throttled
+		// NSLog(@"%s 503", _cmd);
+/*
+		TODO back off, try again in a few seconds...?
+*/
+	// }
 }
+
 
 - (void)connection:(NSURLConnection*)connection
     didReceiveData:(NSData*)data
@@ -154,6 +144,7 @@ didReceiveResponse:(NSURLResponse*)response
 	#endif
 	[deliciousData appendData: data];
 }
+
 
 - (void)connection:(NSURLConnection*)connection
 didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
