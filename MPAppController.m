@@ -97,6 +97,9 @@ didReceiveResponse:(NSURLResponse*)response
 	NSLog(@"%s", _cmd);
 	#endif
 	[progressSpinner stopAnimation:self];
+	/*
+		TODO where else should we send a stop? on error condition, right?
+	*/
 	NSXMLDocument *shieldsUpProbe;
 	shieldsUpProbe = [[NSXMLDocument alloc] initWithData: portProbeData options: NSXMLDocumentTidyHTML error: nil];
 
