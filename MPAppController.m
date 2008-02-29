@@ -49,8 +49,6 @@ TODO anything on awakeFromNib?
 	*/
 }
 
-
-
 - (void) probePort: (int) portNumber
 {
 	#ifdef NSLOG_DEBUG

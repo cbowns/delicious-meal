@@ -14,7 +14,7 @@
 	IBOutlet NSTableView *tableView;
 	IBOutlet NSProgressIndicator *progressSpinner;
 	
-	NSMutableData *portProbeData;
+	NSMutableData *deliciousData;
 }
 
 - (IBAction)startDownload:(id)sender;
