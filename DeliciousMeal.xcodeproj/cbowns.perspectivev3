@@ -281,8 +281,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>12</integer>
-									<integer>9</integer>
+									<integer>2</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -320,7 +320,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>E5A466B70D1CAEF800B68196</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>InfoPlist.strings</string>
+								<string>DeliciousPage.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -328,20 +328,20 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>E5A466B80D1CAEF800B68196</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>InfoPlist.strings</string>
+										<string>DeliciousPage.h</string>
 										<key>_historyCapacity</key>
 										<integer>40</integer>
 										<key>bookmark</key>
-										<string>E515675C0D786745009A8704</string>
+										<string>E51567690D787C2E009A8704</string>
 										<key>history</key>
 										<array>
-											<string>E51567460D786745009A8704</string>
-											<string>E51567470D786745009A8704</string>
 											<string>E51567480D786745009A8704</string>
-											<string>E51567490D786745009A8704</string>
 											<string>E515674A0D786745009A8704</string>
 											<string>E515674B0D786745009A8704</string>
-											<string>E515674C0D786745009A8704</string>
+											<string>E51567600D7870FF009A8704</string>
+											<string>E51567610D7870FF009A8704</string>
+											<string>E51567650D787934009A8704</string>
+											<string>E51567660D787934009A8704</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -363,6 +363,9 @@
 											<string>E51567590D786745009A8704</string>
 											<string>E515675A0D786745009A8704</string>
 											<string>E515675B0D786745009A8704</string>
+											<string>E51567620D7870FF009A8704</string>
+											<string>E51567630D7870FF009A8704</string>
+											<string>E51567670D787934009A8704</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
