@@ -11,7 +11,7 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		E574CD500D1EDFA6007F03E4 /* JBAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = E574CD4F0D1EDFA6007F03E4 /* JBAppController.m */; };
+		E574CD500D1EDFA6007F03E4 /* MPAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = E574CD4F0D1EDFA6007F03E4 /* MPAppController.m */; };
 		E5A466D70D1CB19E00B68196 /* DeliciousPage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A466D60D1CB19E00B68196 /* DeliciousPage.m */; };
 /* End PBXBuildFile section */
 
@@ -26,8 +26,8 @@
 		32CA4F630368D1EE00C91783 /* DeliciousMeal_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliciousMeal_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* DeliciousMeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliciousMeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E574CD4E0D1EDFA6007F03E4 /* JBAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBAppController.h; sourceTree = "<group>"; };
-		E574CD4F0D1EDFA6007F03E4 /* JBAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBAppController.m; sourceTree = "<group>"; };
+		E574CD4E0D1EDFA6007F03E4 /* MPAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPAppController.h; sourceTree = "<group>"; };
+		E574CD4F0D1EDFA6007F03E4 /* MPAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPAppController.m; sourceTree = "<group>"; };
 		E5A466D50D1CB19E00B68196 /* DeliciousPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliciousPage.h; sourceTree = "<group>"; };
 		E5A466D60D1CB19E00B68196 /* DeliciousPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliciousPage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,8 +49,8 @@
 			children = (
 				E5A466D50D1CB19E00B68196 /* DeliciousPage.h */,
 				E5A466D60D1CB19E00B68196 /* DeliciousPage.m */,
-				E574CD4E0D1EDFA6007F03E4 /* JBAppController.h */,
-				E574CD4F0D1EDFA6007F03E4 /* JBAppController.m */,
+				E574CD4E0D1EDFA6007F03E4 /* MPAppController.h */,
+				E574CD4F0D1EDFA6007F03E4 /* MPAppController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -178,7 +178,7 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				E5A466D70D1CB19E00B68196 /* DeliciousPage.m in Sources */,
-				E574CD500D1EDFA6007F03E4 /* JBAppController.m in Sources */,
+				E574CD500D1EDFA6007F03E4 /* MPAppController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,19 +1,19 @@
 //
-//  JBAppController.m
+//  MPAppController.m
 //  DeliciousMeal
 //
 //  Created by Christopher Bowns on 12/23/07.
 //  Copyright 2007 Jaded Bits Software. All rights reserved.
 //
 
-#import "JBAppController.h"
+#import "MPAppController.h"
 
 // comment out nslog_debug definition to turn off logging
 #ifndef NSLOG_DEBUG
 #define NSLOG_DEBUG
 #endif
 
-@implementation JBAppController
+@implementation MPAppController
 
 /*
 TODO anything on awakeFromNib?

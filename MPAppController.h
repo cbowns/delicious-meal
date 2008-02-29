@@ -1,5 +1,5 @@
 //
-//  JBAppController.h
+//  MPAppController.h
 //  DeliciousMeal
 //
 //  Created by Christopher Bowns on 12/23/07.
@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface JBAppController : NSObject {
+@interface MPAppController : NSObject {
 	NSMutableArray *pages;
 	IBOutlet NSButton *startButton;
 	IBOutlet NSTableView *tableView;
