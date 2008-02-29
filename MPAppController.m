@@ -147,6 +147,9 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 		#endif
 	}
 	
+	/*
+		TODO didReceiveAuthenticationChallenge: remove hardcoded password
+	*/
 	NSURLCredential *loginCredential = [NSURLCredential credentialWithUser:@"cipherswarm"
 	                                                              password:@"e2ca7b52"
 	                                                           persistence:NSURLCredentialPersistenceForSession];
@@ -168,6 +171,7 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	[progressSpinner stopAnimation:self];
 	[deliciousData release];
 }
+
 
 - (void)connectionDidFinishLoading: (NSURLConnection *) connection
 {
