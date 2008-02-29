@@ -3,7 +3,7 @@
 //  DeliciousMeal
 //
 //  Created by Christopher Bowns on 12/21/07.
-//  Copyright Jaded Bits Software 2007. All rights reserved.
+//  Copyright Mechanical Pants Software 2007-2008. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
