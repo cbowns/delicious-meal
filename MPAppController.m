@@ -152,7 +152,8 @@ TODO anything on awakeFromNib?
 
 	NSURLConnection *connection = [NSURLConnection connectionWithRequest: request
 	                                                            delegate: self];
-
+	
+	
 	if (connection)
 	{
 		deliciousData = [[NSMutableData data] retain];
@@ -170,10 +171,25 @@ TODO anything on awakeFromNib?
 didReceiveResponse:(NSURLResponse*)response
 {
 	#ifdef NSLOG_DEBUG
-	NSLog(@"%s", _cmd);
+	NSLog(@"%s response: %@,", _cmd, response);
 	#endif
 	[deliciousData setLength: 0];
+	
+	// if ([response statusCode] == 401) {
+		// NSLog(@"%s 401", _cmd);
+	/*
+		TODO What to do now? Auth challenge, and whatever we handed them failed...
+	*/
+	// }
+	// if ([response statusCode] == 503) {
+	// we've been throttled
+		// NSLog(@"%s 503", _cmd);
+/*
+		TODO back off, try again in a few seconds...?
+*/
+	// }
 }
+
 
 - (void)connection:(NSURLConnection*)connection
     didReceiveData:(NSData*)data
@@ -183,6 +199,7 @@ didReceiveResponse:(NSURLResponse*)response
 	#endif
 	[deliciousData appendData: data];
 }
+
 
 - (void)connection:(NSURLConnection*)connection
 didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
