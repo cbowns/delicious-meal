@@ -33,7 +33,6 @@ TODO anything on awakeFromNib?
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
 	#endif
-	// [self probePort:55000];
 	[self getRootDeliciousLink];
 	[progressSpinner startAnimation:self];
 	/*
@@ -126,7 +125,6 @@ TODO anything on awakeFromNib?
 	else
 	{
 		NSLog(@"Unable to get port status: failed to initiate connection");
-		// [self callBackWithStatus: PORT_STATUS_ERROR];
 	}
 }
 
@@ -153,14 +151,13 @@ TODO anything on awakeFromNib?
 	                                timeoutInterval: 15.0];
 
 	NSURLConnection *connection = [NSURLConnection connectionWithRequest: request
-                                                                delegate: self];
+	                                                            delegate: self];
 
 	if (connection)
 		deliciousData = [[NSMutableData data] retain];
 	else
 	{
 		NSLog(@"Unable to connect!");
-		// [self callBackWithStatus: PORT_STATUS_ERROR];
 	}
 }
 
@@ -199,11 +196,8 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 		#ifdef NSLOG_DEBUG
 		NSLog(@"%s: cancelling authentication challenge:", _cmd);
 		NSLog(@"%s: [challenge previousFailureCount] > 1 == %@", _cmd, [challenge previousFailureCount] > 1 ? @"YES" : @"NO");
-		// NSLog(@"%s: [challenge proposedCredential] != nil == %@", _cmd, [challenge proposedCredential] != nil ? @"YES" : @"NO");
 		#endif
 		[[challenge sender] cancelAuthenticationChallenge:challenge];
-		// [progressSpinner stopAnimation:self];
-		// [deliciousData release];
 		return;
 	}
 	
@@ -256,38 +250,14 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	if (deliciousResult == nil)
 	{
 		NSLog(@"Unable to open page: failed to create xml document");
-		// [self callBackWithStatus: PORT_STATUS_ERROR];
 	}
 	NSArray *nodes = [deliciousResult nodesForXPath: @"/posts/post/tag/" error: nil];
 	if ([nodes count] != 1)
 	{
 		NSLog(@"Unable to get tags: invalid (outdated) XPath expression");
-			// [self callBackWithStatus: PORT_STATUS_ERROR];
 	}
-	// NSString *portStatus = [[[[nodes objectAtIndex: 0] stringValue] stringByTrimmingCharactersInSet:
-	// [[NSCharacterSet letterCharacterSet] invertedSet]] lowercaseString];
 
 	NSLog(@"%s: tags: %s", _cmd, [[nodes objectAtIndex: 0] stringValue]);
-
-/*	if ([portStatus isEqualToString: @"open"])
-	{
-		// [self callBackWithStatus: PORT_STATUS_OPEN];
-		NSLog(@"%s, Port is open.", _cmd);
-	}
-	else if ([portStatus isEqualToString: @"stealth"])
-	{
-		// [self callBackWithStatus: PORT_STATUS_STEALTH];
-		NSLog(@"%s, Port is stealthed", _cmd);
-	}	
-	else if ([portStatus isEqualToString: @"closed"])
-	{
-		// [self callBackWithStatus: PORT_STATUS_CLOSED];
-		NSLog(@"%s, Port is closed.", _cmd);
-	}
-	else {
-		// [self callBackWithStatus: PORT_STATUS_ERROR];
-		NSLog(@"Unable to get port status: unknown port state");
-	}*/
 	
 	[deliciousData release];
 }
