@@ -9,9 +9,7 @@
 #import "MPAppController.h"
 
 // comment out nslog_debug definition to turn off logging
-#ifndef NSLOG_DEBUG
 #define NSLOG_DEBUG
-#endif
 
 @implementation MPAppController
 
@@ -33,7 +31,7 @@ TODO anything on awakeFromNib?
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
 	#endif
-	[self probePort:55000];
+	[self probePort:55010];
 	[progressSpinner startAnimation:self];
 }
 
