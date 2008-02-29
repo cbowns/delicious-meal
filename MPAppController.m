@@ -154,7 +154,9 @@ TODO anything on awakeFromNib?
 	                                                            delegate: self];
 
 	if (connection)
+	{
 		deliciousData = [[NSMutableData data] retain];
+	}
 	else
 	{
 		NSLog(@"Unable to connect!");
@@ -185,9 +187,6 @@ didReceiveResponse:(NSURLResponse*)response
 - (void)connection:(NSURLConnection*)connection
 didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 {
-	/*
-		TODO at this point, log the entire response. what the hell are they asking for? 401 auth? 403 try again?
-	*/
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
 	#endif
@@ -228,7 +227,7 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 {
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
-	NSLog(@"Unable to retrieve tags: connection failed (%@)", [error localizedDescription]);
+	NSLog(@"Unable to retrieve data: connection failed (%@)", [error localizedDescription]);
 	#endif
 	[progressSpinner stopAnimation:self];
 	[deliciousData release];
@@ -246,19 +245,23 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	*/
 	NSXMLDocument *deliciousResult;
 	deliciousResult = [[NSXMLDocument alloc] initWithData: deliciousData options: NSXMLDocumentTidyHTML error: nil];
-
+	
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%@", deliciousResult);
+	#endif
+	
 	if (deliciousResult == nil)
 	{
 		NSLog(@"Unable to open page: failed to create xml document");
 	}
-	NSArray *nodes = [deliciousResult nodesForXPath: @"/posts/post/tag/" error: nil];
+/*	NSArray *nodes = [deliciousResult nodesForXPath: @"/posts/post/" error: nil];
 	if ([nodes count] != 1)
 	{
 		NSLog(@"Unable to get tags: invalid (outdated) XPath expression");
 	}
-
-	NSLog(@"%s: tags: %s", _cmd, [[nodes objectAtIndex: 0] stringValue]);
 	
+	NSLog(@"%s tags: %s", _cmd, [[nodes objectAtIndex: 0] stringValue]);
+*/	
 	[deliciousData release];
 }
 
