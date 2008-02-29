@@ -329,19 +329,11 @@
 										<string>E5A466B80D1CAEF800B68196</string>
 										<key>PBXProjectModuleLabel</key>
 										<string>DeliciousPage.h</string>
-										<key>_historyCapacity</key>
-										<integer>40</integer>
-										<key>bookmark</key>
-										<string>E51567690D787C2E009A8704</string>
 										<key>history</key>
 										<array>
 											<string>E51567480D786745009A8704</string>
 											<string>E515674A0D786745009A8704</string>
 											<string>E515674B0D786745009A8704</string>
-											<string>E51567600D7870FF009A8704</string>
-											<string>E51567610D7870FF009A8704</string>
-											<string>E51567650D787934009A8704</string>
-											<string>E51567660D787934009A8704</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -349,23 +341,8 @@
 											<string>E5B7DDBE0D49592F000C2204</string>
 											<string>E5B7DDBF0D49592F000C2204</string>
 											<string>E515674D0D786745009A8704</string>
-											<string>E515674E0D786745009A8704</string>
-											<string>E515674F0D786745009A8704</string>
-											<string>E51567500D786745009A8704</string>
-											<string>E51567510D786745009A8704</string>
-											<string>E51567520D786745009A8704</string>
-											<string>E51567530D786745009A8704</string>
-											<string>E51567540D786745009A8704</string>
-											<string>E51567550D786745009A8704</string>
-											<string>E51567560D786745009A8704</string>
-											<string>E51567570D786745009A8704</string>
-											<string>E51567580D786745009A8704</string>
-											<string>E51567590D786745009A8704</string>
 											<string>E515675A0D786745009A8704</string>
 											<string>E515675B0D786745009A8704</string>
-											<string>E51567620D7870FF009A8704</string>
-											<string>E51567630D7870FF009A8704</string>
-											<string>E51567670D787934009A8704</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -467,11 +444,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E515675D0D786745009A8704</string>
+				<string>E585CDFF0D78929500AEE4CB</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>E515675E0D786745009A8704</string>
+				<string>E585CE000D78929500AEE4CB</string>
 				<string>E5A466B70D1CAEF800B68196</string>
-				<string>E515675F0D786745009A8704</string>
+				<string>E585CE010D78929500AEE4CB</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
