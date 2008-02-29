@@ -20,6 +20,7 @@
 - (IBAction)startDownload:(id)sender;
 
 - (void) probePort:(int)portNumber;
+- (void)getRootDeliciousLink;
 
 // #warning Implement the following methods:
 // #warning spinner progress as private method to call for turning on and off

@@ -15,11 +15,19 @@
     NSString *hashValue;
 }
 
+/*
+	TODO add an initWithBookmarkCount: andHashValue: and pageUrl: method for ease of life.
+		should it take a string or an NSURL? do we even NEED an NSURL here? no idea.
+*/
+
 - (int)bookmarkCount;
 - (void)setBookmarkCount:(int)aBookmarkCount;
 
 - (NSURL *)pageUrl;
 - (void)setPageUrl:(NSURL *)aPageUrl;
+/*
+	TODO object conversion needed?
+*/
 // - (void)setPageUrl:(NSString *)aPageUrl;
 
 
