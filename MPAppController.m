@@ -75,17 +75,59 @@ TODO anything on awakeFromNib?
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
 	#endif
-	NSURLRequest *request;
+	
+	
+	NSString *request = @"tags/get";
+	// NSString *request = @"posts/get?&url=http://del.icio.us/";
+	
+	NSString *username = @"cipherswarm";
+	NSString *password = @"e2ca7b52";
+	NSString *agent = @"(DeliciousMeal/0.01 (Mac OS X; http://cbowns.com/contact)";
+	NSString *header = @"User-Agent";
+	
+	NSString *apiPath = [NSString stringWithFormat:@"https://%@:%@@api.del.icio.us/v1/", username, password, nil];
+	
+	NSURL *requestURL = [NSURL URLWithString:[apiPath stringByAppendingString:request]];
+	NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL:requestURL];
+	
+	[URLRequest setValue:agent forHTTPHeaderField:header];
 
-	request = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithFormat: @"https://api.del.icio.us/v1/posts/get?&url=http://del.icio.us/", 80]]
-	                                    cachePolicy: NSURLRequestReloadIgnoringCacheData
-	                                timeoutInterval: 15.0];
-
-	NSURLConnection *connection = [NSURLConnection connectionWithRequest: request
+	NSError *error;
+	NSHTTPURLResponse *response;
+	NSData *xmlData = [NSURLConnection sendSynchronousRequest:URLRequest returningResponse:&response error:&error];
+	NSLog(@"API request: '%@', response: %i, d/l size: %i", request, [response statusCode], [xmlData length], nil);
+	if ([response statusCode] == 401) {
+		NSLog(@"%s 401", _cmd);
+		/*
+			TODO What to do now? Auth challenge, and whatever we handed them failed...
+		*/
+	}
+	if ([response statusCode] == 503) {
+			// we've been throttled
+		NSLog(@"%s 503", _cmd);
+		/*
+			TODO back off, try again in a few seconds...?
+		*/
+	}
+	
+	
+	
+	
+	
+/*	NSURLRequest *URLRequest;
+	URLRequest = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"https://api.del.icio.us/v1/tags/get"]]
+	//@"https://api.del.icio.us/v1/posts/get?&url=http://del.icio.us/", 443]]
+                               cachePolicy: NSURLRequestReloadIgnoringCacheData
+                           timeoutInterval: 15.0];
+	// [request setValue:agent forHTTPHeaderField:header];
+*/
+	NSURLConnection *connection = [NSURLConnection connectionWithRequest: URLRequest
 	                                                            delegate: self];
 
 	if (connection)
+	{
 		deliciousData = [[NSMutableData data] retain];
+	}
 	else
 	{
 		NSLog(@"Unable to connect!");
@@ -116,9 +158,6 @@ didReceiveResponse:(NSURLResponse*)response
 - (void)connection:(NSURLConnection*)connection
 didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 {
-	/*
-		TODO at this point, log the entire response. what the hell are they asking for? 401 auth? 403 try again?
-	*/
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
 	#endif
@@ -159,7 +198,7 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 {
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
-	NSLog(@"Unable to retrieve tags: connection failed (%@)", [error localizedDescription]);
+	NSLog(@"Unable to retrieve data: connection failed (%@)", [error localizedDescription]);
 	#endif
 	[progressSpinner stopAnimation:self];
 	[deliciousData release];
@@ -177,19 +216,23 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	*/
 	NSXMLDocument *deliciousResult;
 	deliciousResult = [[NSXMLDocument alloc] initWithData: deliciousData options: NSXMLDocumentTidyHTML error: nil];
-
+	
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%@", deliciousResult);
+	#endif
+	
 	if (deliciousResult == nil)
 	{
 		NSLog(@"Unable to open page: failed to create xml document");
 	}
-	NSArray *nodes = [deliciousResult nodesForXPath: @"/posts/post/tag/" error: nil];
+/*	NSArray *nodes = [deliciousResult nodesForXPath: @"/posts/post/" error: nil];
 	if ([nodes count] != 1)
 	{
 		NSLog(@"Unable to get tags: invalid (outdated) XPath expression");
 	}
-
-	NSLog(@"%s: tags: %s", _cmd, [[nodes objectAtIndex: 0] stringValue]);
 	
+	NSLog(@"%s tags: %s", _cmd, [[nodes objectAtIndex: 0] stringValue]);
+*/	
 	[deliciousData release];
 }
 
