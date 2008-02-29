@@ -217,11 +217,11 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	}
 	
 	/*
-		TODO didReceiveAuthenticationChallenge: remove hardcoded password
+		TODO didReceiveAuthenticationChallenge: remove hardcoded password: prompt for username and pass instead
 	*/
 	NSURLCredential *loginCredential = [NSURLCredential credentialWithUser:@"cswarm1"
 	                                                              password:@"e2ca7b52"
-	                                                           persistence:NSURLCredentialPersistenceForSession];
+	                                                           persistence:NSURLCredentialPersistencePermanent];
 	
 	[[challenge sender] useCredential:loginCredential
 	       forAuthenticationChallenge:challenge];
@@ -236,7 +236,6 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	NSLog(@"%s", _cmd);
 	NSLog(@"Unable to retrieve tags: connection failed (%@)", [error localizedDescription]);
 	#endif
-	// [self callBackWithStatus: PORT_STATUS_ERROR];
 	[progressSpinner stopAnimation:self];
 	[deliciousData release];
 }
