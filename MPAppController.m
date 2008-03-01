@@ -116,23 +116,35 @@ TODO anything on awakeFromNib?
 didReceiveResponse:(NSURLResponse*)response
 {
 	#ifdef NSLOG_DEBUG
-	NSLog(@"%s response: %@,", _cmd, response);
+	NSLog(@"%s,", _cmd);
 	#endif
+	NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
 	[deliciousData setLength: 0];
+
+	// parse the httpResponse
+	NSDictionary *allHeaderFields = [httpResponse allHeaderFields];
+	NSEnumerator *enumerator = [allHeaderFields keyEnumerator];
+	id key;
+	while ((key = [enumerator nextObject])) {
+			//printf("%s : %s\n", [key cString],
+			//        [[dict objectForKey: key] cString]);
+		NSLog(@"%@ : %@", key, [allHeaderFields objectForKey:key]);
+	}
 	
-	// if ([response statusCode] == 401) {
-		// NSLog(@"%s 401", _cmd);
+	NSLog(@"%s statusCode: %i", _cmd, [httpResponse statusCode]);
+	if ([httpResponse statusCode] == 401) {
+		NSLog(@"%s 401", _cmd);
 	/*
 		TODO What to do now? Auth challenge, and whatever we handed them failed...
 	*/
-	// }
-	// if ([response statusCode] == 503) {
+	}
+	if ([httpResponse statusCode] == 503) {
 	// we've been throttled
-		// NSLog(@"%s 503", _cmd);
+		NSLog(@"%s 503", _cmd);
 /*
 		TODO back off, try again in a few seconds...?
 */
-	// }
+	}
 }
 
 
