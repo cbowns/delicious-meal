@@ -8,7 +8,7 @@
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
-		activeArchitecture = ppc;
+		activeArchitecture = i386;
 		activeBuildConfigurationName = Debug;
 		activeExecutable = E5A466AB0D1CAEF500B68196 /* DeliciousMeal */;
 		activeTarget = 8D1107260486CEB800E47090 /* DeliciousMeal */;
@@ -98,7 +98,6 @@
 			PBXWorkspaceStateSaveDate = 230936253;
 		};
 		perUserProjectItems = {
-
 			E51567480D786745009A8704 = E51567480D786745009A8704 /* PBXTextBookmark */;
 			E515674A0D786745009A8704 = E515674A0D786745009A8704 /* PBXTextBookmark */;
 			E515674B0D786745009A8704 = E515674B0D786745009A8704 /* PBXTextBookmark */;
