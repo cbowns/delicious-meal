@@ -267,9 +267,7 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	NSLog(@"%s", _cmd);
 	#endif
 	[progressSpinner stopAnimation:self];
-	/*
-		TODO where else should we send a stop? on error condition, right?
-	*/
+
 	NSXMLDocument *deliciousResult;
 	deliciousResult = [[NSXMLDocument alloc] initWithData: deliciousData options: NSXMLDocumentTidyHTML error: nil];
 	
