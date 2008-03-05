@@ -176,15 +176,13 @@ didReceiveResponse:(NSURLResponse*)response
 	NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
 	[deliciousData setLength: 0];
 
-	// parse the httpResponse
-	NSDictionary *allHeaderFields = [httpResponse allHeaderFields];
-	NSEnumerator *enumerator = [allHeaderFields keyEnumerator];
-	id key;
-	while ((key = [enumerator nextObject])) {
-			//printf("%s : %s\n", [key cString],
-			//        [[dict objectForKey: key] cString]);
-		NSLog(@"%@ : %@", key, [allHeaderFields objectForKey:key]);
-	}
+	// if you want to view the headers, uncomment here:
+	// NSDictionary *allHeaderFields = [httpResponse allHeaderFields];
+	// NSEnumerator *enumerator = [allHeaderFields keyEnumerator];
+	// id key;
+	// while ((key = [enumerator nextObject])) {
+		// NSLog(@"%@ : %@", key, [allHeaderFields objectForKey:key]);
+	// }
 	
 	NSLog(@"%s statusCode: %i", _cmd, [httpResponse statusCode]);
 	if ([httpResponse statusCode] == 401) {
