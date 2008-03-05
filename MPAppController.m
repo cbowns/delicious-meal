@@ -227,23 +227,27 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 		NSLog(@"Unable to open page: failed to create xml document");
 	}
 	NSArray *nodes = [deliciousResult nodesForXPath: @"/posts/post" error: nil];
-	// if ([nodes count] != 1)
-	// {
-		// NSLog(@"Unable to get tags: invalid (outdated) XPath expression");
-	// }
+	if ([nodes count] != 1)
+	{
+		NSLog(@"Unable to get tags: invalid (outdated) XPath expression");
+	}
+	else
+	{
+		NSXMLElement *element = [nodes objectAtIndex:0];
+		NSLog(@"%s %@", _cmd, element);
+		NSLog(@"%s bookmarked by %@ other people", _cmd, [[element attributeForName:@"others"] objectValue]);
+		
+		NSLog(@"%s hash: %@", _cmd, [[element attributeForName:@"hash"] objectValue]);
+		
+		// debug code.
+		// unsigned int objectCount = [nodes count], index;
+		// for(index = 0; index < objectCount; index++ )
+		// {
+			// id	object         = [nodes objectAtIndex:index];
+			// NSLog(@"%s %@", _cmd, object);
+		// }
+	}
 	
-	// we now have an array of NSXMLNode objects.
-	
-	// unsigned int	objectCount = [nodes count], index = 0;
-	NSXMLElement *element = [nodes objectAtIndex:0];
-	NSLog(@"%s %@", _cmd, element);
-	NSLog(@"%s %@", _cmd, [[element attributeForName:@"others"] objectValue]);
-	// for(index = 0; index < objectCount; index += 1)
-	// {
-		// id	object = [nodes objectAtIndex:index];
-		// NSLog(@"%s %@", _cmd, object);
-	// }
-	// NSLog(@"%s tags: %s", _cmd, [[nodes objectAtIndex: 0] stringValue]);
 	
 	[deliciousData release];
 }
