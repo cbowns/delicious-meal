@@ -237,7 +237,7 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	// unsigned int	objectCount = [nodes count], index = 0;
 	NSXMLElement *element = [nodes objectAtIndex:0];
 	NSLog(@"%s %@", _cmd, element);
-	NSLog(@"%s %@", _cmd, [element attributeForName:@"others"]);
+	NSLog(@"%s %@", _cmd, [[element attributeForName:@"others"] objectValue]);
 	// for(index = 0; index < objectCount; index += 1)
 	// {
 		// id	object = [nodes objectAtIndex:index];
