@@ -171,7 +171,7 @@ TODO anything on awakeFromNib?
 didReceiveResponse:(NSURLResponse*)response
 {
 	#ifdef NSLOG_DEBUG
-	NSLog(@"%s,", _cmd);
+	NSLog(@"%s", _cmd);
 	#endif
 	NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
 	[deliciousData setLength: 0];
@@ -274,21 +274,32 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	deliciousResult = [[NSXMLDocument alloc] initWithData: deliciousData options: NSXMLDocumentTidyHTML error: nil];
 	
 	#ifdef NSLOG_DEBUG
-	NSLog(@"%@", deliciousResult);
+	NSLog(@"%s %@", _cmd, deliciousResult);
 	#endif
 	
 	if (deliciousResult == nil)
 	{
 		NSLog(@"Unable to open page: failed to create xml document");
 	}
-/*	NSArray *nodes = [deliciousResult nodesForXPath: @"/posts/post/" error: nil];
-	if ([nodes count] != 1)
-	{
-		NSLog(@"Unable to get tags: invalid (outdated) XPath expression");
-	}
+	NSArray *nodes = [deliciousResult nodesForXPath: @"/posts/post" error: nil];
+	// if ([nodes count] != 1)
+	// {
+		// NSLog(@"Unable to get tags: invalid (outdated) XPath expression");
+	// }
 	
-	NSLog(@"%s tags: %s", _cmd, [[nodes objectAtIndex: 0] stringValue]);
-*/	
+	// we now have an array of NSXMLNode objects.
+	
+	// unsigned int	objectCount = [nodes count], index = 0;
+	NSXMLElement *element = [nodes objectAtIndex:0];
+	NSLog(@"%s %@", _cmd, element);
+	NSLog(@"%s %@", _cmd, [element attributeForName:@"others"]);
+	// for(index = 0; index < objectCount; index += 1)
+	// {
+		// id	object = [nodes objectAtIndex:index];
+		// NSLog(@"%s %@", _cmd, object);
+	// }
+	// NSLog(@"%s tags: %s", _cmd, [[nodes objectAtIndex: 0] stringValue]);
+	
 	[deliciousData release];
 }
 
