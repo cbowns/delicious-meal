@@ -19,7 +19,7 @@
 
 - (IBAction)startDownload:(id)sender;
 
-- (void) probePort:(int)portNumber;
+// - (void) probePort:(int)portNumber;
 - (void)getRootDeliciousLink;
 
 // #warning Implement the following methods:
@@ -32,7 +32,5 @@
 // objectValueForTableColumn:(NSTableColumn*)aTableColumn
 //             row:(int)row;
 
-
-// #warning Implement the NSURLConnection delegates here
 
 @end
