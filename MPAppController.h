@@ -17,7 +17,7 @@
 	NSMutableData *deliciousData;
 }
 
-- (IBAction)startDownload:(id)sender;
+- (IBAction)getNextIteration:(id)sender;
 
 // - (void) probePort:(int)portNumber;
 - (void)getRootDeliciousLink;

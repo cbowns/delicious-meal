@@ -15,7 +15,7 @@
 		<dict>
 			<key>ACTIONS</key>
 			<dict>
-				<key>startDownload</key>
+				<key>getNextIteration</key>
 				<string>id</string>
 			</dict>
 			<key>CLASS</key>

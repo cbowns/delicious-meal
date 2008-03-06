@@ -28,7 +28,7 @@ TODO anything to do on awakeFromNib?
 	return self;
 }
 
-- (IBAction)startDownload:(id)sender
+- (IBAction)getNextIteration:(id)sender
 {
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
