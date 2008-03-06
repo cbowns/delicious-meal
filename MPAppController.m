@@ -19,6 +19,7 @@
 TODO anything to do on awakeFromNib?
 */
 
+
 - (id) init
 {
 	if(self = [super init])
@@ -27,6 +28,7 @@ TODO anything to do on awakeFromNib?
 	}
 	return self;
 }
+
 
 - (IBAction)getNextIteration:(id)sender
 {
@@ -74,6 +76,7 @@ TODO anything to do on awakeFromNib?
 		NSLog(@"Unable to connect!");
 	}
 }
+
 
 - (void)getDeliciousLinkForHashValue:(NSString *)hash
 {
