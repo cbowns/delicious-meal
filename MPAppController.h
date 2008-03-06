@@ -13,8 +13,9 @@
 	IBOutlet NSButton *startButton;
 	IBOutlet NSTableView *tableView;
 	IBOutlet NSProgressIndicator *progressSpinner;
-	
+	bool connectionIsComplete;
 	NSMutableData *deliciousData;
+	// NSData *deliciousData;
 }
 
 - (IBAction)getNextIteration:(id)sender;

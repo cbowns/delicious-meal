@@ -23,6 +23,9 @@
 - (int)bookmarkCount;
 - (void)setBookmarkCount:(int)aBookmarkCount;
 
+- (NSString *)hashValue;
+- (void)setHashValue:(NSString *)aHashValue;
+
 - (NSURL *)pageUrl;
 - (void)setPageUrl:(NSURL *)aPageUrl;
 /*
@@ -31,7 +34,5 @@
 // - (void)setPageUrl:(NSString *)aPageUrl;
 
 
-- (NSString *)hashValue;
-- (void)setHashValue:(NSString *)aHashValue;
 
 @end
