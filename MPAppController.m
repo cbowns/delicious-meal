@@ -40,46 +40,6 @@ TODO anything to do on awakeFromNib?
 }
 
 
-- (void)getRootDeliciousLink
-{
-	#ifdef NSLOG_DEBUG
-	NSLog(@"%s", _cmd);
-	#endif
-	
-	
-	// NSString *request = @"tags/get";
-	NSString *request = @"posts/get?&url=http://del.icio.us/";
-	
-	NSString *username = @"cipherswarm";
-	NSString *password = @"e2ca7b52";
-	NSString *agent = @"(DeliciousMeal/0.01 (Mac OS X; http://cbowns.com/contact)";
-	NSString *header = @"User-Agent";
-	
-	NSString *apiPath = [NSString stringWithFormat:@"https://%@:%@@api.del.icio.us/v1/", username, password, nil];
-	
-	NSURL *requestURL = [NSURL URLWithString:[apiPath stringByAppendingString:request]];
-	NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL: requestURL];
-
-	[URLRequest setCachePolicy: NSURLRequestReloadIgnoringCacheData];
-	[URLRequest setTimeoutInterval: 15.0];
-	
-	[URLRequest setValue:agent forHTTPHeaderField:header];
-	
-	NSURLConnection *connection = [NSURLConnection connectionWithRequest: URLRequest
-	                                                            delegate: self];
-	
-	
-	if (connection)
-	{
-		deliciousData = [[NSMutableData data] retain];
-	}
-	else
-	{
-		NSLog(@"Unable to connect!");
-	}
-}
-
-
 - (void)getDeliciousLinkForHashValue:(NSString *)hash
 {
 	#ifdef NSLOG_DEBUG
