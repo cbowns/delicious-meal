@@ -128,6 +128,47 @@ TODO anything to do on awakeFromNib?
 }
 
 
+- (void)processConnectionData
+{
+	NSXMLDocument *deliciousResult;
+	deliciousResult = [[NSXMLDocument alloc] initWithData: deliciousData options: NSXMLDocumentTidyHTML error: nil];
+	
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%s %@", _cmd, deliciousResult);
+	#endif
+	
+	if (deliciousResult == nil)
+	{
+		NSLog(@"Unable to open page: failed to create xml document");
+	}
+	NSArray *nodes = [deliciousResult nodesForXPath: @"/posts/post" error: nil];
+	if ([nodes count] != 1)
+	{
+		NSLog(@"Unable to get tags: invalid (outdated) XPath expression");
+	}
+	else
+	{
+		NSXMLElement *element = [nodes objectAtIndex:0];
+		NSLog(@"%s %@", _cmd, element);
+		NSLog(@"%s bookmarked by %@ other people", _cmd, [[element attributeForName:@"others"] objectValue]);
+		
+		NSLog(@"%s hash: %@", _cmd, [[element attributeForName:@"hash"] objectValue]);
+		
+		// debug code.
+		// unsigned int objectCount = [nodes count], index;
+		// for(index = 0; index < objectCount; index++ )
+		// {
+			// id	object         = [nodes objectAtIndex:index];
+			// NSLog(@"%s %@", _cmd, object);
+		// }
+	}
+	
+	
+	[deliciousData release];
+}
+
+
+
 #pragma mark NSURLConnection delegate methods
 
 - (void)connection:(NSURLConnection*)connection
@@ -230,42 +271,12 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	NSLog(@"%s", _cmd);
 	#endif
 	[progressSpinner stopAnimation:self];
-
-	NSXMLDocument *deliciousResult;
-	deliciousResult = [[NSXMLDocument alloc] initWithData: deliciousData options: NSXMLDocumentTidyHTML error: nil];
 	
-	#ifdef NSLOG_DEBUG
-	NSLog(@"%s %@", _cmd, deliciousResult);
-	#endif
+	/*
+		TODO call back to a processResults method here
+	*/
 	
-	if (deliciousResult == nil)
-	{
-		NSLog(@"Unable to open page: failed to create xml document");
-	}
-	NSArray *nodes = [deliciousResult nodesForXPath: @"/posts/post" error: nil];
-	if ([nodes count] != 1)
-	{
-		NSLog(@"Unable to get tags: invalid (outdated) XPath expression");
-	}
-	else
-	{
-		NSXMLElement *element = [nodes objectAtIndex:0];
-		NSLog(@"%s %@", _cmd, element);
-		NSLog(@"%s bookmarked by %@ other people", _cmd, [[element attributeForName:@"others"] objectValue]);
-		
-		NSLog(@"%s hash: %@", _cmd, [[element attributeForName:@"hash"] objectValue]);
-		
-		// debug code.
-		// unsigned int objectCount = [nodes count], index;
-		// for(index = 0; index < objectCount; index++ )
-		// {
-			// id	object         = [nodes objectAtIndex:index];
-			// NSLog(@"%s %@", _cmd, object);
-		// }
-	}
-	
-	
-	[deliciousData release];
+	[self processConnectionData];
 }
 
 
