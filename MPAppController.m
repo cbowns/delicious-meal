@@ -16,7 +16,7 @@
 @implementation MPAppController
 
 /*
-TODO anything on awakeFromNib?
+TODO anything to do on awakeFromNib?
 */
 
 - (id) init
@@ -33,19 +33,8 @@ TODO anything on awakeFromNib?
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
 	#endif
-	[self getRootDeliciousLink];
 	[progressSpinner startAnimation:self];
-	/*
-		TODO Here's the plan:
-		1. retrieve the root level bookmark
-		
-		2. get the hash value
-		3. bookmark the hash value
-		4. get the number of bookmarked users
-		
-		5. add a new DeliciousPage object to the array with those values
-		lather rinse repeat ad infinitum, stop when users = 1 (== me?)
-	*/
+	[self getDeliciousLinkForHashValue:@""];
 }
 
 - (void) probePort: (int) portNumber
@@ -79,6 +68,53 @@ TODO anything on awakeFromNib?
 	
 	// NSString *request = @"tags/get";
 	NSString *request = @"posts/get?&url=http://del.icio.us/";
+	
+	NSString *username = @"cipherswarm";
+	NSString *password = @"e2ca7b52";
+	NSString *agent = @"(DeliciousMeal/0.01 (Mac OS X; http://cbowns.com/contact)";
+	NSString *header = @"User-Agent";
+	
+	NSString *apiPath = [NSString stringWithFormat:@"https://%@:%@@api.del.icio.us/v1/", username, password, nil];
+	
+	NSURL *requestURL = [NSURL URLWithString:[apiPath stringByAppendingString:request]];
+	NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL: requestURL];
+
+	[URLRequest setCachePolicy: NSURLRequestReloadIgnoringCacheData];
+	[URLRequest setTimeoutInterval: 15.0];
+	
+	[URLRequest setValue:agent forHTTPHeaderField:header];
+	
+	NSURLConnection *connection = [NSURLConnection connectionWithRequest: URLRequest
+	                                                            delegate: self];
+	
+	
+	if (connection)
+	{
+		deliciousData = [[NSMutableData data] retain];
+	}
+	else
+	{
+		NSLog(@"Unable to connect!");
+	}
+}
+
+- (void)getDeliciousLinkForHashValue:(NSString *)hash
+{
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%s", _cmd);
+	#endif
+	NSString *request;
+	
+	// NSString *request = @"tags/get";
+	
+	if(hash == @"") // then we're starting fresh.
+	{
+		request = @"posts/get?&url=http://del.icio.us/";
+	}
+	else
+	{
+		request = [@"posts/get?&url=http://del.icio.us/url/" stringByAppendingString: hash];
+	}
 	
 	NSString *username = @"cipherswarm";
 	NSString *password = @"e2ca7b52";
