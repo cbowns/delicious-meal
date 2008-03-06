@@ -19,7 +19,6 @@
 
 - (IBAction)getNextIteration:(id)sender;
 
-// - (void) probePort:(int)portNumber;
 // - (void)getRootDeliciousLink;
 
 // #warning Implement the following methods:
