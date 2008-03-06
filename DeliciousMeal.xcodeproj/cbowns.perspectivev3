@@ -281,23 +281,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>2</integer>
-									<integer>1</integer>
-									<integer>0</integer>
-								</array>
-								<array>
-									<integer>3</integer>
-									<integer>1</integer>
-									<integer>0</integer>
-								</array>
-								<array>
-									<integer>4</integer>
-									<integer>1</integer>
-									<integer>0</integer>
-								</array>
-								<array>
-									<integer>5</integer>
-									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -319,7 +302,7 @@
 							<real>185</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>0 187 969 691 0 0 1440 878 </string>
+						<string>60 159 969 691 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -373,7 +356,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {762, 513}}</string>
 								<key>RubberWindowFrame</key>
-								<string>0 187 969 691 0 0 1440 878 </string>
+								<string>60 159 969 691 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -398,7 +381,7 @@
 										<key>Frame</key>
 										<string>{{10, 27}, {762, 105}}</string>
 										<key>RubberWindowFrame</key>
-										<string>0 187 969 691 0 0 1440 878 </string>
+										<string>60 159 969 691 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -813,7 +796,7 @@
 		<string>/Users/cbowns/Desktop/Source Code/DeliciousMeal src/DeliciousMeal.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>0 187 969 691 0 0 1440 878 </string>
+	<string>60 159 969 691 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

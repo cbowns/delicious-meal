@@ -46,7 +46,7 @@ TODO anything to do on awakeFromNib?
 	
 	if ([pages count] == 0)
 	{
-		pageToBookmark = @"http://del.icio.us";
+		pageToBookmark = @"http://del.icio.us/";
 	}
 	else
 	{
@@ -66,10 +66,6 @@ TODO anything to do on awakeFromNib?
 	
 	[self processConnectionResult]; // this puts the new data into the pages array.
 	
-/*	[deliciousData retain];
-	// we now have data. get to work.
-*/
-
 	// [self getDeliciousLinkForHashValue:@""];
 	
 	
