@@ -37,27 +37,6 @@ TODO anything to do on awakeFromNib?
 	[self getDeliciousLinkForHashValue:@""];
 }
 
-- (void) probePort: (int) portNumber
-{
-	#ifdef NSLOG_DEBUG
-	NSLog(@"%s", _cmd);
-	#endif
-	NSURLRequest *portProbeRequest;
-
-	portProbeRequest = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithFormat: @"https://www.grc.com/x/portprobe=%d", portNumber]]
-	                                    cachePolicy: NSURLRequestReloadIgnoringCacheData
-	                                timeoutInterval: 15.0];
-
-	NSURLConnection *portProbeConnection = [NSURLConnection connectionWithRequest: portProbeRequest
-	                                                                     delegate: self];
-
-	if (portProbeConnection)
-		deliciousData = [[NSMutableData data] retain];
-	else
-	{
-		NSLog(@"Unable to get port status: failed to initiate connection");
-	}
-}
 
 - (void)getRootDeliciousLink
 {
