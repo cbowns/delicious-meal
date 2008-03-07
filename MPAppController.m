@@ -141,7 +141,7 @@ TODO anything to do on awakeFromNib?
 
 	[bookmarkData retain];
 	[URLRequest release];
-	NSLog(@"%s bookmarkData: %@", _cmd, bookmarkData);
+	// NSLog(@"%s bookmarkData: %@", _cmd, bookmarkData);
 	// we now have data.
 
 	// make sure it's a valid response.
