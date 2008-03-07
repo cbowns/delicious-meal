@@ -354,4 +354,27 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 }
 
 
+#if 0
+#pragma mark -
+#pragma mark Table View Source Methods
+#endif
+
+- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+{
+	return [pages count];
+}
+
+
+- (id)tableView:(NSTableView *)aTableView
+objectValueForTableColumn:(NSTableColumn *)aTableColumn
+            row:(int)row
+{
+	
+}
+
+
+
+
+
+
 @end
