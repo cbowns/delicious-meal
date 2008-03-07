@@ -15,22 +15,24 @@
 	IBOutlet NSProgressIndicator *progressSpinner;
 	bool connectionIsComplete;
 	NSMutableData *deliciousData;
-	// NSData *deliciousData;
 }
 
 - (IBAction)getNextIteration:(id)sender;
 
-// - (void)getRootDeliciousLink;
-
-// #warning Implement the following methods:
-// #warning spinner progress as private method to call for turning on and off
 
 // #warning Implement table view methods as well: in place of NSArrayController or non?
+
+#if 0
+#pragma mark -
+#pragma mark Table View Data Methods
+#endif
+
+
 // Table view data source methods
-// - (int)numberOfRowsInTableView:(NSTableView *)aTableView;
-// - (id)tableView:(NSTableView*)aTableView
-// objectValueForTableColumn:(NSTableColumn*)aTableColumn
-//             row:(int)row;
+- (int)numberOfRowsInTableView:(NSTableView *)aTableView;
+- (id)tableView:(NSTableView*)aTableView
+objectValueForTableColumn:(NSTableColumn*)aTableColumn
+            row:(int)row;
 
 
 @end
