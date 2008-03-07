@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "DeliciousPage.h"
 
 @interface MPAppController : NSObject {
 	NSMutableArray *pages;
@@ -18,6 +19,9 @@
 }
 
 - (IBAction)getNextIteration:(id)sender;
+- (void)bookmarkPage:(NSString *)url;
+- (void)getDeliciousInfoForUrl:(NSString *)url;
+- (void)processConnectionResult;
 
 
 // #warning Implement table view methods as well: in place of NSArrayController or non?

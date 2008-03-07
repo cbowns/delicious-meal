@@ -57,14 +57,14 @@ TODO anything to do on awakeFromNib?
 	[self bookmarkPage:pageToBookmark];
 	
 	// now get some info on the page
-	[self getDeliciousInfoForUrl:pageToBookmark];
-	int i;
-	while (!connectionIsComplete) { i = 0; } //  busy wait for this to finish.
+	// [self getDeliciousInfoForUrl:pageToBookmark];
+	// int i;
+	// while (!connectionIsComplete) { i = 0; } //  busy wait for this to finish.
 	/*
 		TODO don't busy wait here. go synchronous on the call?
 	*/
 	
-	[self processConnectionResult]; // this puts the new data into the pages array.
+	// [self processConnectionResult]; // this puts the new data into the pages array.
 	
 	// [self getDeliciousLinkForHashValue:@""];
 	
@@ -76,49 +76,83 @@ TODO anything to do on awakeFromNib?
 
 - (void)bookmarkPage:(NSString *)url
 {
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%s", _cmd);
+	#endif
 	NSString *username = @"cipherswarm";
 	NSString *password = @"e2ca7b52";
 	NSString *agent = @"(DeliciousMeal/0.01 (Mac OS X; http://cbowns.com/contact)";
 	NSString *header = @"User-Agent";
 	NSString *apiPath = [NSString stringWithFormat:@"https://%@:%@@api.del.icio.us/v1/", username, password, nil];
+
+	NSNumber *count = [NSNumber numberWithInt:[pages count]];
+	NSString *description = [NSString stringWithFormat:@"description=\"deliciouswilleatitself%@\"", count, nil];
 	
-	int count = [pages count];
-	NSString *description = [[@"description=\"deliciouswilleatitself: number" stringByAppendingString:count] stringByAppendingString:@"\""];
 	NSString *tags = @"tags=\"deliciousapp\"";
-	
+
 	NSString *request = @"posts/add?";
 	request = [request stringByAppendingString:description];
 	request = [request stringByAppendingString:[@"&" stringByAppendingString:tags]];
 	request = [request stringByAppendingString:[@"&url=" stringByAppendingString:url]];
+	request = [apiPath stringByAppendingString:request];
 	
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%s request: %@", _cmd, request);
+	#endif
+	request = [request stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%s request after escaping: %@", _cmd, request);
+	#endif
 	
-	NSURL *requestURL = [NSURL URLWithString:[apiPath stringByAppendingString:request]];
-	NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL: requestURL];
+	NSURL *requestURL = [NSURL URLWithString:request/*[apiPath stringByAppendingString:request]*/];
+	// NSURL *requestURL = [[NSURL alloc] initWithString:request];
+	#ifdef NSLOG_DEBUG
+	if(requestURL == nil)
+	{
+		NSLog(@"%s bad URL, is nil.", _cmd);
+	}
+	else
+	{
+		// NSLog(@"%s requestURL: %@", _cmd, requestURL);
+	}
+	#endif
+	
+	NSMutableURLRequest *URLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:request]];
+	// NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request]];
 
 	[URLRequest setCachePolicy: NSURLRequestReloadIgnoringCacheData];
 	[URLRequest setTimeoutInterval: 15.0];
-	
-	[URLRequest setValue:agent forHTTPHeaderField:header];
 
+	[URLRequest setValue:agent forHTTPHeaderField:header];
+	
+	#ifdef NSLOG_DEBUG
+	// NSLog(@"%s %@", _cmd, URLRequest);
+	#endif
 	NSURLResponse *response;
 	NSError *error;
 	// this is a synchronous call.
-	NSData bookmarkData = [NSURLConnection sendSynchronousRequest:URLRequest returningResponse:*response error:*error];
+	NSData *bookmarkData = [NSURLConnection sendSynchronousRequest:URLRequest returningResponse:&response error:&error];
 	// NSURLConnection *connection = [NSURLConnection connectionWithRequest: URLRequest
-	                                                            // delegate: self];
-	
+	// delegate: self];
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%s response: %@", _cmd, response);
+	NSLog(@"%s error: %@", _cmd, error);
+	#endif
+
 	[bookmarkData retain];
+	[URLRequest release];
+	NSLog(@"%s bookmarkData: %@", _cmd, bookmarkData);
 	// we now have data.
-	
+
 	// make sure it's a valid response.
-	
+
 	NSXMLDocument *deliciousResult;
 	deliciousResult = [[NSXMLDocument alloc] initWithData: bookmarkData options: NSXMLDocumentTidyHTML error: nil];
-	
+
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s %@", _cmd, deliciousResult);
 	#endif
-	
+
 	if (deliciousResult == nil)
 	{
 		NSLog(@"Unable to open page: failed to create xml document");
@@ -130,11 +164,12 @@ TODO anything to do on awakeFromNib?
 	}
 	else
 	{
-		NSXMLElement *element = [nodes objectAtIndex:0];
+		NSXMLElement *element = (NSXMLElement *)[nodes objectAtIndex:0];
 		#ifdef NSLOG_DEBUG
 		NSLog(@"%s %@", _cmd, element);
 		#endif
-		if([[element attributeForName:@"code"] objectValue] != "done")
+		NSString *result = (NSString *)[[element attributeForName:@"code"] objectValue];
+		if( ![result isEqualToString: @"done"])
 		{
 			NSLog(@"%s EPIC FAIL:", _cmd);
 			NSLog(@"%s code: %@", _cmd, [[element attributeForName:@"code"] objectValue]);
@@ -146,16 +181,13 @@ TODO anything to do on awakeFromNib?
 	}
 	[deliciousResult release];
 	[bookmarkData release];
-	}
+}
 
-
-- (void)getDeliciousInfoForUrl(NSString *)url
+- (void)getDeliciousInfoForUrl:(NSString *)url
 {
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
 	#endif
-		request = @"posts/get?&url=";
-	
 	
 	NSString *username = @"cipherswarm";
 	NSString *password = @"e2ca7b52";
@@ -192,7 +224,6 @@ TODO anything to do on awakeFromNib?
 }
 
 
-
 - (void)processConnectionResult
 {
 	NSXMLDocument *deliciousResult;
@@ -221,8 +252,8 @@ TODO anything to do on awakeFromNib?
 		#endif
 		
 		DeliciousPage *page = [[DeliciousPage alloc] init];
-		[page setHashValue: [[element attributeForName:@"hash"] objectValue]];
-		[page setBookmarkCount: [[element attributeForName:@"others"] objectValue]];
+		[page setHashValue: (NSString *)[[element attributeForName:@"hash"] objectValue]];
+		[page setBookmarkCount: (int)[[element attributeForName:@"others"] objectValue]];
 		
 		// add the page to the pages array?
 		[pages insertObject: page atIndex:[pages count]]; // this sends a retain, so release the page.
@@ -369,7 +400,9 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 objectValueForTableColumn:(NSTableColumn *)aTableColumn
             row:(int)row
 {
-	
+	/*
+		TODO return something here!
+	*/
 }
 
 
