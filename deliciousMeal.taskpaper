@@ -7,4 +7,14 @@ Delicious Meal:
 
 - try retrieving apple.com or grc.com
 	- see http://transmission.m0k.org/trac/browser/trunk/macosx/PortChecker.h?rev=956 for example code
-	- 
+
+- all the changes we made to bookmarkURL, need to be made to getDeliciousblah
+- once we have the results saved in the NSMutableArray, we need to update the TableView
+- tabulate results (hash URL and counts) into NSTableView
+future improvements:
+	- don't busy wait on the bool! do a synchronous call instead
+	- remove name and password: pull from keychain
+- later modifications:
+	- 2-4 seconds (random interval) between each page request
+		- some sort of feedback for this? notice text in the window?
+			- "Waiting for API…"
