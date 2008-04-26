@@ -54,7 +54,65 @@ TODO anything on awakeFromNib?
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
 	#endif
-	NSURLRequest *portProbeRequest;
+	NSString *username = @"cswarm1";
+	NSString *password = @"e2ca7b52";
+	NSString *agent = @"(DeliciousMeal/0.01 (Mac OS X; http://cbowns.com/contact)";
+	NSString *header = @"User-Agent";
+	NSString *apiPath = [NSString stringWithFormat:@"https://%@:%@@api.del.icio.us/v1/", username, password, nil];
+
+	NSNumber *count = [NSNumber numberWithInt:[pages count]];
+	NSString *description = [NSString stringWithFormat:@"description=\"deliciouswilleatitself%@\"", count, nil];
+	
+	NSString *tags = @"tags=\"deliciousapp\"";
+
+	NSString *request = @"posts/add?";
+	request = [request stringByAppendingString:description];
+	request = [request stringByAppendingString:[@"&" stringByAppendingString:tags]];
+	request = [request stringByAppendingString:[@"&url=" stringByAppendingString:url]];
+	request = [apiPath stringByAppendingString:request];
+	
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%s request: %@", _cmd, request);
+	#endif
+	request = [request stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%s request after escaping: %@", _cmd, request);
+	#endif
+	
+	NSURL *requestURL = [NSURL URLWithString:request/*[apiPath stringByAppendingString:request]*/];
+	// NSURL *requestURL = [[NSURL alloc] initWithString:request];
+	#ifdef NSLOG_DEBUG
+	if(requestURL == nil)
+	{
+		NSLog(@"%s bad URL, is nil.", _cmd);
+	}
+	else
+	{
+		// NSLog(@"%s requestURL: %@", _cmd, requestURL);
+	}
+	#endif
+	
+	NSMutableURLRequest *URLRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:request]];
+	// NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request]];
+
+	[URLRequest setCachePolicy: NSURLRequestReloadIgnoringCacheData];
+	[URLRequest setTimeoutInterval: 15.0];
+
+	[URLRequest setValue:agent forHTTPHeaderField:header];
+	
+	#ifdef NSLOG_DEBUG
+	// NSLog(@"%s %@", _cmd, URLRequest);
+	#endif
+	NSURLResponse *response;
+	NSError *error;
+	// this is a synchronous call.
+	NSData *bookmarkData = [NSURLConnection sendSynchronousRequest:URLRequest returningResponse:&response error:&error];
+	// NSURLConnection *connection = [NSURLConnection connectionWithRequest: URLRequest
+	// delegate: self];
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%s response: %@", _cmd, response);
+	NSLog(@"%s error: %@", _cmd, error);
+	#endif
 
 	portProbeRequest = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithFormat: @"https://www.grc.com/x/portprobe=%d", portNumber]]
 	                                    cachePolicy: NSURLRequestReloadIgnoringCacheData
@@ -77,7 +135,18 @@ TODO anything on awakeFromNib?
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
 	#endif
-	NSURLRequest *request;
+	
+	NSString *username = @"cswarm1";
+	NSString *password = @"e2ca7b52";
+	NSString *agent = @"(DeliciousMeal/0.01 (Mac OS X; http://cbowns.com/contact)";
+	NSString *header = @"User-Agent";
+	NSString *apiPath = [NSString stringWithFormat:@"https://%@:%@@api.del.icio.us/v1/", username, password, nil];
+		
+	NSString *request = @"posts/get";
+	request = [request stringByAppendingString:[@"url=" stringByAppendingString:url]];
+		
+	NSURL *requestURL = [NSURL URLWithString:[apiPath stringByAppendingString:request]];
+	NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL: requestURL];
 
 	request = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithFormat: @"https://api.del.icio.us/v1/posts/get?&url=http://del.icio.us/", 80]]
 	                                    cachePolicy: NSURLRequestReloadIgnoringCacheData
@@ -150,7 +219,7 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	/*
 		TODO didReceiveAuthenticationChallenge: remove hardcoded password
 	*/
-	NSURLCredential *loginCredential = [NSURLCredential credentialWithUser:@"cipherswarm"
+	NSURLCredential *loginCredential = [NSURLCredential credentialWithUser:@"cswarm1"
 	                                                              password:@"e2ca7b52"
 	                                                           persistence:NSURLCredentialPersistenceForSession];
 	
