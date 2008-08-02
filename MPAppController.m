@@ -24,9 +24,9 @@ TODO anything to do on awakeFromNib?
 {
 	if(self = [super init])
 	{
-		
+		// do we need to do anything here? It's unclear.
 	}
-	connectionIsComplete = false;
+	connectionIsComplete = true;
 	return self;
 }
 
@@ -37,7 +37,6 @@ TODO anything to do on awakeFromNib?
 	NSLog(@"%s", _cmd);
 	#endif
 	[progressSpinner startAnimation:self];
-	connectionIsComplete = false;
 	
 	// look in our pages array: if there's no value, we're bookmarking http://del.icio.us
 	// else, we're bookmarking http://del.icio.us/url/<hash value>
@@ -56,21 +55,7 @@ TODO anything to do on awakeFromNib?
 	
 	[self bookmarkPage:pageToBookmark];
 	
-	// now get some info on the page
-	// [self getDeliciousInfoForUrl:pageToBookmark];
-	// int i;
-	// while (!connectionIsComplete) { i = 0; } //  busy wait for this to finish.
-	/*
-		TODO don't busy wait here. go synchronous on the call?
-	*/
-	
-	// [self processConnectionResult]; // this puts the new data into the pages array.
-	
-	// [self getDeliciousLinkForHashValue:@""];
-	
-	
-	[progressSpinner stopAnimation:self];
-	
+	// present an error if we need to? How can we tell?
 }
 
 
@@ -79,9 +64,9 @@ TODO anything to do on awakeFromNib?
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
 	#endif
-	NSString *username = @"cipherswarm";
+	NSString *username = @"cswarm1";
 	NSString *password = @"e2ca7b52";
-	NSString *agent = @"(DeliciousMeal/0.01 (Mac OS X; http://cbowns.com/contact)";
+	NSString *agent = @"(DeliciousMeal/0.01a1 (Mac OS X; http://cbowns.com/contact)";
 	NSString *header = @"User-Agent";
 	NSString *apiPath = [NSString stringWithFormat:@"https://%@:%@@api.del.icio.us/v1/", username, password, nil];
 
@@ -156,11 +141,13 @@ TODO anything to do on awakeFromNib?
 	if (deliciousResult == nil)
 	{
 		NSLog(@"Unable to open page: failed to create xml document");
+		[progressSpinner stopAnimation:self];
 	}
 	NSArray *nodes = [deliciousResult nodesForXPath: @"/result" error: nil];
 	if ([nodes count] != 1)
 	{
 		NSLog(@"Unable to get result code: invalid (outdated) XPath expression");
+		[progressSpinner stopAnimation:self];
 	}
 	else
 	{
@@ -173,14 +160,26 @@ TODO anything to do on awakeFromNib?
 		{
 			NSLog(@"%s EPIC FAIL:", _cmd);
 			NSLog(@"%s code: %@", _cmd, [[element attributeForName:@"code"] objectValue]);
+			[progressSpinner stopAnimation:self];
 		}
 		else
 		{
-			//assuming success. cooool.
+			// We now need to retrieve data from del.icio.us on the page we just bookmarked. # of bookmarking users, etc.
+			// add those attributes to a deliciousPage object and return it.
+			[self getDeliciousInfoForUrl:url];
+			//We go asynchronous from here.
 		}
 	}
-	[deliciousResult release];
+	
+	// Release my objects.
+	
+	if (deliciousResult != nil) //It may be if things earlier didn't work out for us.
+	{
+		[deliciousResult release];
+		deliciousResult = nil;
+	}
 	[bookmarkData release];
+	bookmarkData = nil;
 }
 
 - (void)getDeliciousInfoForUrl:(NSString *)url
@@ -189,15 +188,19 @@ TODO anything to do on awakeFromNib?
 	NSLog(@"%s", _cmd);
 	#endif
 	
-	NSString *username = @"cipherswarm";
+	NSString *username = @"cswarm1";
 	NSString *password = @"e2ca7b52";
 	NSString *agent = @"(DeliciousMeal/0.01 (Mac OS X; http://cbowns.com/contact)";
 	NSString *header = @"User-Agent";
 	NSString *apiPath = [NSString stringWithFormat:@"https://%@:%@@api.del.icio.us/v1/", username, password, nil];
 		
-	NSString *request = @"posts/get";
+	NSString *request = @"posts/get?";
 	request = [request stringByAppendingString:[@"url=" stringByAppendingString:url]];
-		
+	
+	#ifdef NSLOG_DEBUG
+	NSLog(@"%s request: %@", _cmd, request);
+	#endif
+	
 	NSURL *requestURL = [NSURL URLWithString:[apiPath stringByAppendingString:request]];
 	NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL: requestURL];
 
@@ -206,12 +209,11 @@ TODO anything to do on awakeFromNib?
 	
 	[URLRequest setValue:agent forHTTPHeaderField:header];
 
-	NSURLResponse *response;
-	NSError *error;
 	// this is an asynchronous call.
 	NSURLConnection *connection = [NSURLConnection connectionWithRequest: URLRequest
 	                                                            delegate: self];
 	
+	connectionIsComplete = false;
 	
 	if (connection)
 	{
@@ -220,6 +222,10 @@ TODO anything to do on awakeFromNib?
 	else
 	{
 		NSLog(@"%s Unable to connect!", _cmd);
+		/*
+			TODO see the error object for more information?
+		*/
+		[progressSpinner stopAnimation:self];
 	}
 }
 
@@ -257,6 +263,10 @@ TODO anything to do on awakeFromNib?
 		
 		// add the page to the pages array?
 		[pages insertObject: page atIndex:[pages count]]; // this sends a retain, so release the page.
+		#ifdef NSLOG_DEBUG
+		NSLog(@"%s", _cmd);
+		#endif
+		
 		[page release];
 		
 		// debug code.
@@ -364,7 +374,7 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	NSLog(@"%s", _cmd);
 	NSLog(@"Unable to retrieve data: connection failed (%@)", [error localizedDescription]);
 	#endif
-	// [progressSpinner stopAnimation:self];
+	[progressSpinner stopAnimation:self];
 	connectionIsComplete = true;
 	// [deliciousData release];
 }
@@ -375,15 +385,12 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
 	#endif
-	// [progressSpinner stopAnimation:self];
 	
-	/*
-		TODO call back to a processResults method here
-	*/
 	connectionIsComplete = true;
-	// [self processConnectionData];
+	[self processConnectionResult];
+	
+	[progressSpinner stopAnimation:self];
 }
-
 
 #if 0
 #pragma mark -

@@ -1,20 +1,46 @@
-Delicious Meal:
-- API calls: bookmark each of the pages del.icio.us/url/<hash value>, see how many people have bookmarked
-- taking initial hash value: bookmark it:
-- take the response, parse for:
-	- bookmarking users
-	- hash value: bookmark new page, continue ad inifinitum
+inbox:
+- auth challenges: make sure spinner stops if we fail?
+- handle auth challenges appropriately.
+- 
 
-- try retrieving apple.com or grc.com
-	- see http://transmission.m0k.org/trac/browser/trunk/macosx/PortChecker.h?rev=956 for example code
+Aug 2:
+	goals for today:
+	- get bookmarking of the hash value returned working
+	- add a constructor to the deliciousPage to make it easier to create and set attributes all in one shot
+	- delete password from the code and my keychain, see if we can't get it to prompt me for everything.
+	- see below: ensure spinner behaves properly.
 
-- all the changes we made to bookmarkURL, need to be made to getDeliciousblah
-- once we have the results saved in the NSMutableArray, we need to update the TableView
-- tabulate results (hash URL and counts) into NSTableView
-future improvements:
-	- don't busy wait on the bool! do a synchronous call instead
-	- remove name and password: pull from keychain
-- later modifications:
-	- 2-4 seconds (random interval) between each page request
-		- some sort of feedback for this? notice text in the window?
-			- "Waiting for API…"
+Main app flow:
+- user clicks button
+- we figure out the next page to bookmark
+- we call bookmarkPage, which _synchronously_ bookmarks that URL.
+- if the bookmarking succeeds, bookmarkPage calls getDeliciousInfoForUrl, which _asynchronously_ retrieves the page info for that URL and adds it to the table.
+- rinse, repeat.
+	gotchas/toChange:
+	- the spinner needs to spin until bookmarkPage bombs, or the async calls succeed or fail. otherwise, this is muy confusing.
+
+Archive:
+	Delicious Meal:
+	- API calls: bookmark each of the pages del.icio.us/url/<hash value>, see how many people have bookmarked
+	- taking initial hash value: bookmark it:
+	- take the response, parse for:
+		- bookmarking users
+		- hash value: bookmark new page, continue ad inifinitum
+	
+	- try retrieving apple.com or grc.com
+		- see http://transmission.m0k.org/trac/browser/trunk/macosx/PortChecker.h?rev=956 for example code
+	
+	- all the changes we made to bookmarkURL, need to be made to getDeliciousblah
+	- once we have the results saved in the NSMutableArray, we need to update the TableView
+	- tabulate results (hash URL and counts) into NSTableView
+	future improvements:
+		- don't busy wait on the bool! do a synchronous call instead @done(2008-08-02)
+		- remove name and password: pull from keychain
+	- later modifications:
+		- 2-4 seconds (random interval) between each page request
+			- some sort of feedback for this? notice text in the window?
+				- "Waiting for API…"
+	
+	
+	
+	
