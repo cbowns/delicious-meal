@@ -26,6 +26,8 @@ TODO anything to do on awakeFromNib?
 	{
 		// do we need to do anything here? It's unclear.
 	}
+	pages = [[NSMutableArray alloc] init];
+	deliciousData = nil;
 	connectionIsComplete = true;
 	return self;
 }
@@ -257,17 +259,19 @@ TODO anything to do on awakeFromNib?
 		NSLog(@"%s hash: %@", _cmd, [[element attributeForName:@"hash"] objectValue]);
 		#endif
 		
-		DeliciousPage *page = [[DeliciousPage alloc] init];
-		[page setHashValue: (NSString *)[[element attributeForName:@"hash"] objectValue]];
-		[page setBookmarkCount: (int)[[element attributeForName:@"others"] objectValue]];
+		NSString *hashString = [[element attributeForName:@"hash"] stringValue];
+		NSLog(@"%s hashString: \"%@\" retain count: %i", _cmd, hashString, [hashString retainCount]);
 		
-		// add the page to the pages array?
-		[pages insertObject: page atIndex:[pages count]]; // this sends a retain, so release the page.
-		#ifdef NSLOG_DEBUG
-		NSLog(@"%s", _cmd);
-		#endif
 		
+		DeliciousPage *page = [[DeliciousPage alloc] initWithBookmarkCount:[[[element attributeForName:@"others"] stringValue] intValue]
+		                                                         hashValue:hashString];
+		
+		NSLog(@"%s page's hashValue: %s; bookmarkCount: %i", _cmd, [page hashValue], [page bookmarkCount]);
+		
+		[pages addObject:page]; // this sends a retain, so release the page.
 		[page release];
+		page = nil;
+		
 		
 		// debug code.
 		// unsigned int objectCount = [nodes count], index;

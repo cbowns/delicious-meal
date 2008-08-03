@@ -275,8 +275,6 @@
 								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>1C37FBAC04509CD000000102</string>
-								<string>E514CD5B0E44EC0C00354D2F</string>
-								<string>E514CD4D0E44EABF00354D2F</string>
 								<string>1C37FAAC04509CD000000102</string>
 								<string>1CC0EA4004350EF90041110B</string>
 							</array>
@@ -346,10 +344,6 @@
 										<string>E5A466B80D1CAEF800B68196</string>
 										<key>PBXProjectModuleLabel</key>
 										<string>DeliciousPage.h</string>
-										<key>_historyCapacity</key>
-										<integer>40</integer>
-										<key>bookmark</key>
-										<string>E514CD6D0E45010F00354D2F</string>
 										<key>history</key>
 										<array>
 											<string>E51567480D786745009A8704</string>
@@ -366,9 +360,6 @@
 											<string>E515674D0D786745009A8704</string>
 											<string>E515675A0D786745009A8704</string>
 											<string>E515675B0D786745009A8704</string>
-											<string>E514CD5E0E44EC0C00354D2F</string>
-											<string>E514CD5F0E44EC0C00354D2F</string>
-											<string>E514CD6A0E44F86800354D2F</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -470,11 +461,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E514CD500E44EAC000354D2F</string>
+				<string>E5D1999D0E451B9C00DC1681</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>E514CD510E44EAC000354D2F</string>
+				<string>E5D1999E0E451B9C00DC1681</string>
 				<string>E5A466B70D1CAEF800B68196</string>
-				<string>E514CD520E44EAC000354D2F</string>
+				<string>E5D1999F0E451B9C00DC1681</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -659,11 +650,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E514CD530E44EAC000354D2F</string>
+				<string>E5D199A00E451B9C00DC1681</string>
 				<string>1CA23EE50692099D00951B8B</string>
-				<string>E514CD540E44EAC000354D2F</string>
+				<string>E5D199A10E451B9C00DC1681</string>
 				<string>E5A466CD0D1CB03400B68196</string>
-				<string>E514CD550E44EAC000354D2F</string>
+				<string>E5D199A20E451B9C00DC1681</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
 			<key>ToolbarConfiguration</key>
@@ -805,14 +796,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E5B7DDCF0D4959BC000C2204</string>
+				<string>E5D199A30E451B9C00DC1681</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>E5B7DDD00D4959BC000C2204</string>
-				<string>E5B7DDD10D4959BC000C2204</string>
-				<string>E5B7DDD20D4959BC000C2204</string>
-				<string>E5B7DDD30D4959BC000C2204</string>
-				<string>E5A466B70D1CAEF800B68196</string>
+				<string>E5D199A40E451B9C00DC1681</string>
+				<string>E5D199A50E451B9C00DC1681</string>
+				<string>E5D199A60E451B9C00DC1681</string>
+				<string>E5D199A70E451B9C00DC1681</string>
+				<string>E5D199A80E451B9C00DC1681</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>

@@ -15,10 +15,20 @@
 {
 	if(self = [super init])
 	{
-		NSLog(@"%s", _cmd);
+		NSLog(@"DeliciousPage %s", _cmd);
+		pageUrl = nil;
+	    hashValue = nil;
 		// init the URL, set count to -1, and zero out the hash value
 	}
 	return self;
+}
+
+- (id)initWithBookmarkCount:(int)aBookmarkCount hashValue:(NSString *)aHashValue
+{
+	DeliciousPage *aPage = [[DeliciousPage alloc] init];
+	[aPage setBookmarkCount:aBookmarkCount];
+	[aPage setHashValue:aHashValue];
+	return aPage;
 }
 
 - (int)bookmarkCount
@@ -59,10 +69,10 @@ TODO There's no way this is the proper way to do the copy and retain counts. Fix
 
 - (void)setHashValue:(NSString *)aHashValue
 {
-/*
-TODO There's no way this is the proper way to do the copy and retain counts. Fix it.
-*/
+	NSString *oldHashValue = hashValue;
 	hashValue = aHashValue;
+	[oldHashValue release];
+	[hashValue retain];
 }
 
 @end
