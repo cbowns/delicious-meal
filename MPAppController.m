@@ -266,7 +266,7 @@ TODO anything to do on awakeFromNib?
 		DeliciousPage *page = [[DeliciousPage alloc] initWithBookmarkCount:[[[element attributeForName:@"others"] stringValue] intValue]
 		                                                         hashValue:hashString];
 		
-		NSLog(@"%s page's hashValue: %s; bookmarkCount: %i", _cmd, [page hashValue], [page bookmarkCount]);
+		NSLog(@"%s page's hashValue: %@; bookmarkCount: %i", _cmd, [page hashValue], [page bookmarkCount]);
 		
 		[pages addObject:page]; // this sends a retain, so release the page.
 		[page release];
