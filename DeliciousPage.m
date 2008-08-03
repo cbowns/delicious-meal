@@ -69,10 +69,10 @@ TODO There's no way this is the proper way to do the copy and retain counts. Fix
 
 - (void)setHashValue:(NSString *)aHashValue
 {
-	NSString *oldHashValue = hashValue;
-	hashValue = aHashValue;
-	[oldHashValue release];
-	[hashValue retain];
+	NSString *oldHashValue = hashValue; //save our old one
+	hashValue = aHashValue;             //reassign to the new one
+	[oldHashValue release];             //release the old string
+	[hashValue retain];                 //retain the new one
 }
 
 @end
