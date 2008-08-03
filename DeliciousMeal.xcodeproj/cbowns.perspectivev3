@@ -285,21 +285,6 @@
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
-								<array>
-									<integer>3</integer>
-									<integer>1</integer>
-									<integer>0</integer>
-								</array>
-								<array>
-									<integer>4</integer>
-									<integer>1</integer>
-									<integer>0</integer>
-								</array>
-								<array>
-									<integer>5</integer>
-									<integer>1</integer>
-									<integer>0</integer>
-								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
 							<string>{{0, 0}, {185, 632}}</string>
@@ -344,13 +329,17 @@
 										<string>E5A466B80D1CAEF800B68196</string>
 										<key>PBXProjectModuleLabel</key>
 										<string>DeliciousPage.h</string>
+										<key>_historyCapacity</key>
+										<integer>40</integer>
+										<key>bookmark</key>
+										<string>E53029DB0E462AA80022DB56</string>
 										<key>history</key>
 										<array>
 											<string>E51567480D786745009A8704</string>
 											<string>E515674A0D786745009A8704</string>
 											<string>E515674B0D786745009A8704</string>
 											<string>E514CD680E44F86800354D2F</string>
-											<string>E514CD690E44F86800354D2F</string>
+											<string>E53029DA0E462AA80022DB56</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -416,7 +405,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {762, 287}}</string>
+										<string>{{10, 27}, {762, 105}}</string>
 									</dict>
 									<key>Module</key>
 									<string>PBXProjectFindModule</string>
@@ -434,7 +423,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {762, 81}}</string>
+										<string>{{10, 27}, {762, 105}}</string>
 									</dict>
 									<key>Module</key>
 									<string>PBXCVSModule</string>
@@ -461,11 +450,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E5D1999D0E451B9C00DC1681</string>
+				<string>E53029D50E4620FB0022DB56</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>E5D1999E0E451B9C00DC1681</string>
+				<string>E53029D60E4620FB0022DB56</string>
 				<string>E5A466B70D1CAEF800B68196</string>
-				<string>E5D1999F0E451B9C00DC1681</string>
+				<string>E53029D70E4620FB0022DB56</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -529,7 +518,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {0, 0}}</string>
+							<string>{{0, 0}, {947, 632}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -560,7 +549,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>E5A466CD0D1CB03400B68196</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MPAppController.m</string>
+								<string>DeliciousPage.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -568,7 +557,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>E5A466CE0D1CB03400B68196</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>MPAppController.m</string>
+										<string>DeliciousPage.h</string>
 										<key>history</key>
 										<array>
 											<string>E51567480D786745009A8704</string>
@@ -723,7 +712,7 @@
 								<key>sizes</key>
 								<array>
 									<string>{{0, 0}, {485, 221}}</string>
-									<string>{{0, 221}, {485, 222}}</string>
+									<string>{{485, 0}, {484, 221}}</string>
 								</array>
 							</dict>
 							<key>VerticalSplitView</key>
@@ -738,8 +727,8 @@
 								<string>yes</string>
 								<key>sizes</key>
 								<array>
-									<string>{{0, 0}, {485, 443}}</string>
-									<string>{{485, 0}, {484, 443}}</string>
+									<string>{{0, 0}, {969, 221}}</string>
+									<string>{{0, 221}, {969, 222}}</string>
 								</array>
 							</dict>
 						</dict>
@@ -769,10 +758,10 @@
 								<string>Value</string>
 								<real>85</real>
 								<string>Summary</string>
-								<real>255</real>
+								<real>254</real>
 							</array>
 							<key>Frame</key>
-							<string>{{0, 221}, {485, 222}}</string>
+							<string>{{485, 0}, {484, 221}}</string>
 						</dict>
 					</dict>
 					<key>Module</key>

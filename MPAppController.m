@@ -29,9 +29,21 @@ TODO anything to do on awakeFromNib?
 	pages = [[NSMutableArray alloc] init];
 	deliciousData = nil;
 	connectionIsComplete = true;
+	getAllIterations = false;
 	return self;
 }
 
+
+- (IBAction)getAllIterations:(id)sender
+{
+	getAllIterations = true;
+	[self getNextIteration:sender];
+}
+
+- (IBAction)stopIteration:(id)sender
+{
+	getAllIterations = false;
+}
 
 - (IBAction)getNextIteration:(id)sender
 {
@@ -91,9 +103,9 @@ TODO anything to do on awakeFromNib?
 	NSLog(@"%s request after escaping: %@", _cmd, request);
 	#endif
 	
+	#ifdef NSLOG_DEBUG
 	NSURL *requestURL = [NSURL URLWithString:request/*[apiPath stringByAppendingString:request]*/];
 	// NSURL *requestURL = [[NSURL alloc] initWithString:request];
-	#ifdef NSLOG_DEBUG
 	if(requestURL == nil)
 	{
 		NSLog(@"%s bad URL, is nil.", _cmd);
@@ -272,6 +284,9 @@ TODO anything to do on awakeFromNib?
 		[page release];
 		page = nil;
 		
+		// Reload the tableView…?
+		[tableView reloadData];
+		
 		
 		// debug code.
 		// unsigned int objectCount = [nodes count], index;
@@ -393,6 +408,15 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	connectionIsComplete = true;
 	[self processConnectionResult];
 	
+	if ( getAllIterations )
+	{
+		// set a timer to fire in 5 seconds on getNextIteration
+		NSDate *sleepDate = [[NSDate alloc] initWithTimeIntervalSinceNow:3.0];
+		[NSThread sleepUntilDate:sleepDate];
+		[sleepDate release];
+		[self getNextIteration:nil];
+	}
+	
 	[progressSpinner stopAnimation:self];
 }
 
@@ -409,13 +433,19 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 objectValueForTableColumn:(NSTableColumn *)aTableColumn
             row:(int)row
 {
-	NSLog(@"%s tableRow: %i, column: %@", _cmd, row, aTableColumn);
-	return [pages objectAtIndex:row];
+	NSLog(@"%s tableRow: %i, column id: %@", _cmd, row, [aTableColumn identifier]);
+	if ( [[aTableColumn identifier] isEqualToString:@"hashValue"])
+	{
+		NSLog(@"%s getting hashValue", _cmd);
+		return [[pages objectAtIndex:row] hashValue];
+	}
+	else if ( [[aTableColumn identifier] isEqualToString:@"bookmarkCount"])
+	{
+		NSLog(@"%s getting bookmarkCount", _cmd);
+		return [NSNumber numberWithInt:[[pages objectAtIndex:row] bookmarkCount]];
+	}
+	return nil;
 }
-
-
-
-
 
 
 @end

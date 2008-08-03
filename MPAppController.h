@@ -16,8 +16,11 @@
 	IBOutlet NSProgressIndicator *progressSpinner;
 	bool connectionIsComplete;
 	NSMutableData *deliciousData;
+	bool getAllIterations;
 }
 
+- (IBAction)stopIteration:(id)sender;
+- (IBAction)getAllIterations:(id)sender;
 - (IBAction)getNextIteration:(id)sender;
 - (void)bookmarkPage:(NSString *)url;
 - (void)getDeliciousInfoForUrl:(NSString *)url;

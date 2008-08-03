@@ -15,7 +15,11 @@
 		<dict>
 			<key>ACTIONS</key>
 			<dict>
+				<key>getAllIterations</key>
+				<string>id</string>
 				<key>getNextIteration</key>
+				<string>id</string>
+				<key>stopIteration</key>
 				<string>id</string>
 			</dict>
 			<key>CLASS</key>
