@@ -26,10 +26,8 @@
 
 // #warning Implement table view methods as well: in place of NSArrayController or non?
 
-#if 0
 #pragma mark -
 #pragma mark Table View Data Methods
-#endif
 
 
 // Table view data source methods

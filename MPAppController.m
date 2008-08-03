@@ -396,10 +396,8 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	[progressSpinner stopAnimation:self];
 }
 
-#if 0
 #pragma mark -
 #pragma mark Table View Source Methods
-#endif
 
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView
 {
@@ -411,9 +409,8 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 objectValueForTableColumn:(NSTableColumn *)aTableColumn
             row:(int)row
 {
-	/*
-		TODO return something here!
-	*/
+	NSLog(@"%s tableRow: %i, column: %@", _cmd, row, aTableColumn);
+	return [pages objectAtIndex:row];
 }
 
 
