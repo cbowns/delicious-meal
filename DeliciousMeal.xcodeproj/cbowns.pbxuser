@@ -8,7 +8,6 @@
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
-		activeArchitecture = i386;
 		activeBuildConfigurationName = Debug;
 		activeExecutable = E5A466AB0D1CAEF500B68196 /* DeliciousMeal */;
 		activeTarget = 8D1107260486CEB800E47090 /* DeliciousMeal */;
@@ -94,8 +93,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 239476977;
-			PBXWorkspaceStateSaveDate = 239476977;
+			PBXPerProjectTemplateStateSaveDate = 247968199;
+			PBXWorkspaceStateSaveDate = 247968199;
 		};
 		perUserProjectItems = {
 			E514CD680E44F86800354D2F = E514CD680E44F86800354D2F /* PBXTextBookmark */;
@@ -105,8 +104,8 @@
 			E515674D0D786745009A8704 = E515674D0D786745009A8704 /* PBXTextBookmark */;
 			E515675A0D786745009A8704 = E515675A0D786745009A8704 /* PBXTextBookmark */;
 			E515675B0D786745009A8704 = E515675B0D786745009A8704 /* PBXTextBookmark */;
-			E53029DA0E462AA80022DB56 /* PBXBookmark */ = E53029DA0E462AA80022DB56 /* PBXBookmark */;
-			E53029DB0E462AA80022DB56 /* PBXTextBookmark */ = E53029DB0E462AA80022DB56 /* PBXTextBookmark */;
+			E53029DA0E462AA80022DB56 = E53029DA0E462AA80022DB56 /* PBXBookmark */;
+			E532446B0EC7B1D4005EC964 /* PBXTextBookmark */ = E532446B0EC7B1D4005EC964 /* PBXTextBookmark */;
 			E5B7DDBD0D49592F000C2204 = E5B7DDBD0D49592F000C2204 /* PBXTextBookmark */;
 			E5B7DDBE0D49592F000C2204 = E5B7DDBE0D49592F000C2204 /* PBXTextBookmark */;
 			E5B7DDBF0D49592F000C2204 = E5B7DDBF0D49592F000C2204 /* PBXTextBookmark */;
@@ -210,7 +209,7 @@
 		isa = PBXBookmark;
 		fRef = E5A466D50D1CB19E00B68196 /* DeliciousPage.h */;
 	};
-	E53029DB0E462AA80022DB56 /* PBXTextBookmark */ = {
+	E532446B0EC7B1D4005EC964 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = E5A466D50D1CB19E00B68196 /* DeliciousPage.h */;
 		name = "DeliciousPage.h: 22";

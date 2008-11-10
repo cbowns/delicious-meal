@@ -9,9 +9,9 @@
 #import "MPAppController.h"
 
 // comment out nslog_debug definition to turn off logging
-#ifndef NSLOG_DEBUG
-#define NSLOG_DEBUG
-#endif
+// ifndef NSLOG_DEBUG
+// define NSLOG_DEBUG
+// endif
 
 @implementation MPAppController
 
@@ -78,8 +78,10 @@ TODO anything to do on awakeFromNib?
 	#ifdef NSLOG_DEBUG
 	NSLog(@"%s", _cmd);
 	#endif
-	NSString *username = @"cswarm1";
-	NSString *password = @"e2ca7b52";
+	
+	#warning You need to provide a delicious username and password here.
+	NSString *username = @"";
+	NSString *password = @"";
 	NSString *agent = @"(DeliciousMeal/0.01a1 (Mac OS X; http://cbowns.com/contact)";
 	NSString *header = @"User-Agent";
 	NSString *apiPath = [NSString stringWithFormat:@"https://%@:%@@api.del.icio.us/v1/", username, password, nil];
@@ -202,8 +204,9 @@ TODO anything to do on awakeFromNib?
 	NSLog(@"%s", _cmd);
 	#endif
 	
-	NSString *username = @"cswarm1";
-	NSString *password = @"e2ca7b52";
+	#warning You need to provide a delicious username and password here.
+	NSString *username = @"";
+	NSString *password = @"";
 	NSString *agent = @"(DeliciousMeal/0.01 (Mac OS X; http://cbowns.com/contact)";
 	NSString *header = @"User-Agent";
 	NSString *apiPath = [NSString stringWithFormat:@"https://%@:%@@api.del.icio.us/v1/", username, password, nil];
@@ -376,8 +379,9 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 	/*
 		TODO didReceiveAuthenticationChallenge: remove hardcoded password: prompt for username and pass instead
 	*/
-	NSURLCredential *loginCredential = [NSURLCredential credentialWithUser:@"cswarm1"
-	                                                              password:@"e2ca7b52"
+	#warning You need to provide a delicious username and password here.
+	NSURLCredential *loginCredential = [NSURLCredential credentialWithUser:@""
+	                                                              password:@""
 	                                                           persistence:NSURLCredentialPersistencePermanent];
 	
 	[[challenge sender] useCredential:loginCredential
@@ -433,15 +437,21 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 objectValueForTableColumn:(NSTableColumn *)aTableColumn
             row:(int)row
 {
+	#ifdef NSLOG_DEBUG
 	NSLog(@"%s tableRow: %i, column id: %@", _cmd, row, [aTableColumn identifier]);
+	#endif	
 	if ( [[aTableColumn identifier] isEqualToString:@"hashValue"])
 	{
+		#ifdef NSLOG_DEBUG
 		NSLog(@"%s getting hashValue", _cmd);
+		#endif
 		return [[pages objectAtIndex:row] hashValue];
 	}
 	else if ( [[aTableColumn identifier] isEqualToString:@"bookmarkCount"])
 	{
+		#ifdef NSLOG_DEBUG
 		NSLog(@"%s getting bookmarkCount", _cmd);
+		#endif
 		return [NSNumber numberWithInt:[[pages objectAtIndex:row] bookmarkCount]];
 	}
 	return nil;
